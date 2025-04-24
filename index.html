@@ -3,34 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>第一幕</title>
+    <title>第一幕 // 启动</title> <!-- 更神秘的标题 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- 主要标题 -->
-        <h1 id="main-title">欢迎你 挑战者</h1>
+    <!-- Particle background container -->
+    <div id="tsparticles"></div>
 
-        <!-- 周围浮现的各国语言文字 -->
-        <div id="surrounding-texts">
-            <span class="lang-text lang1">Welcome, challenger</span>
-            <span class="lang-text lang2">Bienvenido, retador</span>
-            <span class="lang-text lang3">Willkommen, Herausforderer</span>
-            <span class="lang-text lang4">ようこそ、挑戦者</span> <!-- 日语 -->
-            <span class="lang-text lang5">어서 오세요, 도전자</span> <!-- 韩语 -->
-            <span class="lang-text lang6">Bienvenue, challenger</span>
-            <span class="lang-text lang7">Добро пожаловать, претендент</span> <!-- 俄语 -->
-            <span class="lang-text lang8">Benvenuto, sfidante</span> <!-- 意大利语 -->
-            <!-- 你可以根据需要添加更多语言 -->
-        </div>
-
-        <!-- 红色按钮 -->
-        <button id="reveal-button">开始</button> <!-- 按钮初始文字，可以随便写 -->
-
-        <!-- 下一个线索 (初始隐藏) -->
-        <p id="clue-text"></p>
+    <!-- Preloader/Symbol (Optional but adds polish) -->
+    <div id="preloader">
+        <div class="spinner"></div>
+        <!-- 或者放一个你的ARG符号图片 -->
+        <!-- <img src="symbol.png" alt="Loading Symbol"> -->
     </div>
 
+    <!-- Main content area (initially hidden) -->
+    <div id="main-content" class="hidden">
+        <div class="container">
+            <!-- 主要标题 -->
+            <h1 id="main-title">欢迎你 挑战者</h1>
+
+            <!-- 周围浮现的各国语言文字 -->
+            <div id="surrounding-texts">
+                <span class="lang-text lang1">Welcome, challenger</span>
+                <span class="lang-text lang2">Bienvenido, retador</span>
+                <span class="lang-text lang3">Willkommen, Herausforderer</span>
+                <span class="lang-text lang4">ようこそ、挑戦者</span>
+                <span class="lang-text lang5">어서 오세요, 도전자</span>
+                <span class="lang-text lang6">Bienvenue, challenger</span>
+                <span class="lang-text lang7">Добро пожаловать, претендент</span>
+                <span class="lang-text lang8">Benvenuto, sfidante</span>
+            </div>
+
+            <!-- 升级版按钮 -->
+            <button id="reveal-button">揭示秘密</button> <!-- 更有感觉的文字 -->
+
+            <!-- 下一个线索 (初始隐藏, 将用打字机效果填充) -->
+            <p id="clue-text" class="typing-effect"></p>
+        </div>
+    </div>
+
+    <!-- Load tsParticles library -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
+    <!-- Load your custom script -->
     <script src="script.js"></script>
 </body>
 </html>
