@@ -1,25 +1,121 @@
-/* 设置整个页面的基础样式 */
+/* 基本页面设置 */
 body {
     background-color: #000000; /* 纯黑色背景 */
-    color: #ffffff; /* 默认文字颜色为白色，以防万一 */
-    margin: 0; /* 移除浏览器默认的外边距 */
-    padding: 0; /* 移除浏览器默认的内边距 */
-    height: 100vh; /* 让body元素高度充满整个视口 */
-    display: flex; /* 使用Flexbox布局来实现居中 */
-    justify-content: center; /* 水平居中 */
-    align-items: center; /* 垂直居中 */
-    font-family: sans-serif; /* 使用通用的无衬线字体 */
+    color: #ffffff; /* 默认文字白色 */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* 确保body至少和视口一样高 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; /* 优先使用微软雅黑 */
+    overflow: hidden; /* 防止动画元素短暂溢出导致滚动条 */
+    text-align: center; /* 整体文字居中 */
 }
 
-/* 包裹文字的容器样式 (虽然在这个简单例子里不是绝对必要，但好习惯) */
-.center-container {
-    text-align: center; /* 确保容器内的文字也是居中的 (对单行H1影响不大，但安全) */
+.container {
+    position: relative; /* 作为绝对定位子元素的参照物 */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* 让按钮和线索在标题下方 */
+    justify-content: center;
+    align-items: center;
 }
 
-/* 设置标题文字的具体样式 */
-h1 {
-    color: #ffffff; /* 确保标题文字是白色 */
-    font-size: 2.5em; /* 设置一个合适的字体大小 (可以根据需要调整) */
-    /* 你可以在这里添加更多样式，比如字体、阴影等 */
-    /* 例如: font-family: 'Courier New', Courier, monospace; (如果想要打字机效果) */
+/* 主要标题样式和动画 */
+#main-title {
+    font-size: 4em; /* 较大的字体 */
+    font-weight: bold;
+    margin-bottom: 50px; /* 与按钮留出距离 */
+    opacity: 0; /* 初始透明 */
+    transform: scale(0.5); /* 初始缩小 */
+    animation: pop-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* 应用弹出动画 */
+    animation-delay: 0.5s; /* 延迟半秒开始动画 */
+    z-index: 10; /* 确保在其他文字上方 */
+    position: relative; /* 确保z-index生效 */
+}
+
+/* 弹出动画 */
+@keyframes pop-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 周围文字容器 (辅助定位) */
+#surrounding-texts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 让其不干扰鼠标点击按钮 */
+    z-index: 5; /* 在背景之上，标题之下 */
+}
+
+/* 各国语言文字样式和动画 */
+.lang-text {
+    position: absolute; /* 绝对定位，相对于父容器body */
+    font-size: 0.9em; /* 较小的字体 */
+    opacity: 0; /* 初始透明 */
+    color: rgba(255, 255, 255, 0.7); /* 白色，但有一定透明度 */
+    transition: opacity 2.5s ease-in; /* 透明度变化的过渡效果 */
+    /* 通过不同的 top/left/transform 精确控制位置，围绕中心 */
+}
+
+/* 为每个语言文本手动或通过JS设置不同的位置 */
+/* 这里只给几个示例位置，你可以调整或添加更多 */
+.lang1 { top: 20%; left: 30%; transform: rotate(-15deg); }
+.lang2 { top: 30%; left: 70%; transform: rotate(10deg); }
+.lang3 { top: 75%; left: 25%; transform: rotate(5deg); }
+.lang4 { top: 65%; left: 65%; transform: rotate(-5deg); }
+.lang5 { top: 40%; left: 15%; transform: rotate(20deg); }
+.lang6 { top: 80%; left: 55%; transform: rotate(-10deg); }
+.lang7 { top: 15%; left: 60%; transform: rotate(15deg); }
+.lang8 { top: 55%; left: 80%; transform: rotate(-25deg); }
+
+
+/* 红色按钮样式和动画 */
+#reveal-button {
+    background-color: #ff0000; /* 红色背景 */
+    color: white; /* 白色文字 */
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0; /* 初始透明 */
+    transform: translateY(20px); /* 初始下移一点 */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* 过渡效果 */
+    margin-top: 30px; /* 和标题的距离 */
+    z-index: 15; /* 确保在最上方 */
+    position: relative; /* 确保z-index生效 */
+}
+
+/* 线索文本样式 */
+#clue-text {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #f0e68c; /* 卡其色/淡黄色，突出线索 */
+    opacity: 0; /* 初始透明 */
+    transition: opacity 1s ease-in; /* 渐显效果 */
+    z-index: 15;
+    position: relative;
+    font-family: 'Courier New', Courier, monospace; /* 用等宽字体增加神秘感 */
+    letter-spacing: 2px; /* 增加字母间距 */
+}
+
+/* 用于JS控制元素可见性的类 */
+.visible {
+    opacity: 1 !important; /* 用!important确保覆盖初始的opacity:0 */
+    transform: translateY(0) !important; /* 确保按钮回到原位 */
+}
+.surrounding-visible {
+     opacity: 0.6 !important; /* 周围文字的最终透明度，比0.7低一点 */
 }
