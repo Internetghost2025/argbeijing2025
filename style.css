@@ -1,0 +1,25 @@
+/* 设置整个页面的基础样式 */
+body {
+    background-color: #000000; /* 纯黑色背景 */
+    color: #ffffff; /* 默认文字颜色为白色，以防万一 */
+    margin: 0; /* 移除浏览器默认的外边距 */
+    padding: 0; /* 移除浏览器默认的内边距 */
+    height: 100vh; /* 让body元素高度充满整个视口 */
+    display: flex; /* 使用Flexbox布局来实现居中 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    font-family: sans-serif; /* 使用通用的无衬线字体 */
+}
+
+/* 包裹文字的容器样式 (虽然在这个简单例子里不是绝对必要，但好习惯) */
+.center-container {
+    text-align: center; /* 确保容器内的文字也是居中的 (对单行H1影响不大，但安全) */
+}
+
+/* 设置标题文字的具体样式 */
+h1 {
+    color: #ffffff; /* 确保标题文字是白色 */
+    font-size: 2.5em; /* 设置一个合适的字体大小 (可以根据需要调整) */
+    /* 你可以在这里添加更多样式，比如字体、阴影等 */
+    /* 例如: font-family: 'Courier New', Courier, monospace; (如果想要打字机效果) */
+}
