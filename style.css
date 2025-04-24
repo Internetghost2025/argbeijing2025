@@ -86,7 +86,8 @@ body {
     opacity: 0;
     transform: scale(0.5);
     animation: pop-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    animation-delay: 0.5s; /* 延迟需要在JS中控制，相对于main-content出现后 */
+    /* 延迟需要在JS中控制，相对于main-content出现后 */
+    /* 我们在JS中处理启动时机，这里不需要 animation-delay */
     z-index: 10;
     position: relative;
     /* 辉光效果: 多层阴影叠加 */
@@ -158,33 +159,49 @@ body {
     box-shadow: 0 0 5px rgba(255, 0, 0, 0.4); /* 辉光减弱 */
 }
 
-/* 线索文本 - 准备打字机效果 */
+/* 线索文本 - 无打字机效果版本 */
 #clue-text {
     margin-top: 25px;
-    font-size: 1.6em;
-    color: #f0e68c;
-    opacity: 0; /* 初始完全透明，由JS控制 */
+    font-size: 1.6em; 
+    color: #f0e68c; /* 线索用淡黄色 */
+    opacity: 0; /* 初始隐藏 */
+    transition: opacity 1s ease-in; /* 保留渐显效果 */
     z-index: 15;
     position: relative;
-    font-family: 'Courier New', Courier, monospace;
-    letter-spacing: 3px;
-    min-height: 1.2em; /* 预留空间，防止打字时页面跳动 */
-    display: inline-block; /* 让下划线光标紧随文字 */
-    border-right: 2px solid rgba(255, 255, 255, 0.75); /* 模拟光标 */
-    padding-right: 2px; /* 光标和文字间距 */
-    animation: blink 0.7s step-end infinite; /* 光标闪烁动画 */
-    white-space: nowrap; /* 防止文字换行 */
-    overflow: hidden; /* 隐藏未打出的文字 */
-}
-#clue-text.typing-done {
-    border-right: none; /* 打完字后移除光标 */
-    animation: none; /* 停止闪烁 */
+    font-family: 'Courier New', Courier, monospace; /* 保留等宽字体 */
+    letter-spacing: 3px; /* 保留字母间距 */
+    min-height: 1.2em; /* 保留预留空间 */
+    display: inline-block; /* 让链接块化，但保持行内特性 */
+    /* 确保打字机相关样式被移除或注释掉 */
+    /* border-right: ...; */
+    /* animation: ...; */
+    /* white-space: ...; */
+    /* overflow: ...; */
+    /* padding-right: ...; */
 }
 
-/* 光标闪烁动画 */
+/* 确保 @keyframes blink 规则被移除或注释掉 */
+/* 
 @keyframes blink {
     from, to { border-color: transparent; }
     50% { border-color: rgba(255, 255, 255, 0.75); }
+}
+*/
+
+/* 为 #clue-text 内部的链接添加样式 */
+#clue-text a {
+    color: #a4d8f0; /* 链接用醒目的浅蓝色 */
+    text-decoration: underline; /* 添加下划线，明确是链接 */
+    font-weight: bold; /* 加粗 */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* 添加过渡效果 */
+     /* 给链接本身也加点辉光，使其更醒目 */
+    text-shadow: 0 0 5px rgba(164, 216, 240, 0.5); 
+}
+
+#clue-text a:hover {
+    color: #ffffff; /* 鼠标悬停时变白色 */
+    text-decoration: none; /* 悬停时移除下划线 (可选) */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* 悬停时辉光增强 */
 }
 
 /* 用于JS控制可见性 */
